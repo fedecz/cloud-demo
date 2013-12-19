@@ -15,10 +15,12 @@ function getIPAddress() {
    throw "IP address not found :(";
 }
 
+var port = process.env.VCAP_APP_PORT || 3001;
+
 http.createServer(function (req, res) {
    var ip = getIPAddress();
    res.writeHead(200, {"Content-Type": "text/plain"});
-   res.end("Actual server ip = "+ip);
-}).listen(3001);
+   res.end("Actual server ip = "+ip+"\nActual server port = "+port);
+}).listen(port);
 
-console.log('Listening at port 3001');
+console.log('Listening at port '+port);
